@@ -19,7 +19,6 @@ export default function Table(props: TableProps){
             <th className={`text-left p-4`}>Codigo</th>
             <th className={`text-left p-4`}>Nome</th>
             <th className={`text-left p-4`}>Idade</th>
-            
             {showAction ? (<th className={`text-left p-4`}>Ações</th>) :false }
         </tr>)
         
@@ -32,12 +31,16 @@ export default function Table(props: TableProps){
                 {props.Edit ? (<button className={`
                      flex justify-center items-center 
                      text-green-600 rounded-full p-2 m-1
-                     hover:bg-purple-50`}>{IconeEdit}</button>) : false}
+                     hover:bg-purple-50`}
+                     onClick={()=>props.Edit?.(client)}
+                     >{IconeEdit}</button>) : false}
                 
                 {props.Remove ? (
                 <button  className={` flex justify-center items-center 
                      text-red-500 rounded-full p-2 m-1
-                     hover:bg-purple-50`}>{IconeDelet}</button>) : false}
+                     hover:bg-purple-50`}
+                     onClick={()=>props.Remove?.(client)}
+                     >{IconeDelet}</button>) : false}
 
             </td>
         )
@@ -50,7 +53,7 @@ export default function Table(props: TableProps){
                     <td className="text-left p-4">{client.id}</td>
                     <td className="text-left p-4">{client.name}</td>
                     <td className="text-left p-4">{client.age}</td>
-                    {renderActions(client)}
+                    { showAction ? renderActions(client) : false}
                 </tr>
             )
         })
