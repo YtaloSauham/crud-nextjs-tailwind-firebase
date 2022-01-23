@@ -6,7 +6,15 @@ import Table from '../components/Table'
 import Client from '../core/Client'
 import styles from '../styles/Home.module.css'
 import Form from '../components/Form'
+import { useState } from 'react'
+import useAppData from '../data/hook/useAppdData'
+
+
+type modo = 'form' | 'table'
 export default function Home() {
+
+  const {modo,alternateModo} = useAppData()
+
   const clientes = [
     new Client('Ana', 34, '1'),
     new Client('Bea', 45, '2'),
@@ -29,17 +37,24 @@ export default function Home() {
     ">
      
       <Layout title='Cadastro Simples'>
-        <div className='flex justify-end'> 
 
-         <Button  className='mb-4 bg-gradient-to-r from-green-400 to-green-700'>
-           Novo CLiente</Button>
+        {modo === 'table' ? (
+          <>
+           <div className='flex justify-end'> 
 
-        </div>
-     
-        <Table client={clientes} Edit={Edit} Remove={Remove}></Table>
+           <Button  onClick={alternateModo} className='mb-4 bg-gradient-to-r from-green-400 to-green-700' >
+             Novo CLiente</Button>
+  
+          </div>
+       
+          <Table client={clientes} Edit={Edit} Remove={Remove}></Table>
+          </> ) : (
+            <Form client={clientes[1]} />
+          )}
+       
 
        
-      <Form client={clientes[1]} />
+      
       </Layout>
      
     </div>

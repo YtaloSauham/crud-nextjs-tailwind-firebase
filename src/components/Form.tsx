@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Client from '../core/Client'
+import useAppData from '../data/hook/useAppdData'
 import Button from './Button'
 import Input from './Input'
 
@@ -10,6 +11,7 @@ interface FormProps{
 }
 
 export default function Form(props: FormProps){
+  const {alternateModo} = useAppData()
   const id= props.client?.id 
   const [name,setName]=useState(props.client?.name ?? '')
   const [age,setAge]=useState(props.client?.age ?? 0)
@@ -30,7 +32,7 @@ export default function Form(props: FormProps){
               {id ? 'Alterar' : 'Salvar'}
             </Button>
 
-            <Button className=' bg-gradient-to-r from-gray-400 to-gray-700'>
+            <Button onClick={alternateModo} className=' bg-gradient-to-r from-gray-400 to-gray-700'>
               Cancelar
             </Button>
           </div>
