@@ -12,19 +12,20 @@ import useAppData from '../data/hook/useAppdData'
 
 type modo = 'form' | 'table'
 export default function Home() {
-
+  const [client,setClient] = useState<Client>(Client.empty())
   const {modo,alternateModo} = useAppData()
 
   const clientes = [
     new Client('Ana', 34, '1'),
     new Client('Bea', 45, '2'),
-    new Client('Carla', 55, '1'),
-    new Client('Pedro', 55, '1'),
+    new Client('Carla', 55, '3'),
+    new Client('Pedro', 55, '4'),
   ]
 
 
   function Edit(client: Client){
-    console.log(client.name)
+    alternateModo()
+    setClient(client)
   }
   function Remove(client: Client){
     console.log(client.name)
@@ -32,6 +33,11 @@ export default function Home() {
 
   function saveClient(client: Client){
     console.log(client)
+    alternateModo()
+  }
+
+  function newClient(){
+    setClient(Client.empty())
     alternateModo()
   }
   return (
@@ -46,14 +52,14 @@ export default function Home() {
           <>
            <div className='flex justify-end'> 
 
-           <Button  onClick={alternateModo} className='mb-4 bg-gradient-to-r from-green-400 to-green-700' >
+           <Button  onClick={newClient} className='mb-4 bg-gradient-to-r from-green-400 to-green-700' >
              Novo CLiente</Button>
   
           </div>
        
           <Table client={clientes} Edit={Edit} Remove={Remove}></Table>
           </> ) : (
-            <Form client={clientes[1]} clientChange={saveClient} />
+            <Form client={client} clientChange={saveClient} />
           )}
        
 
