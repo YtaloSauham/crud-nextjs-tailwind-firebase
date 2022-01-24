@@ -30,6 +30,10 @@ export default function Home() {
     console.log(client.name)
   }
 
+  function saveClient(client: Client){
+    console.log(client)
+    alternateModo()
+  }
   return (
     <div className="flex h-screen justify-center items-center 
     bg-gradient-to-r from-blue-500 to-purple-500
@@ -49,7 +53,7 @@ export default function Home() {
        
           <Table client={clientes} Edit={Edit} Remove={Remove}></Table>
           </> ) : (
-            <Form client={clientes[1]} />
+            <Form client={clientes[1]} clientChange={saveClient} />
           )}
        
 

@@ -8,6 +8,7 @@ import Input from './Input'
 
 interface FormProps{
   client: Client
+  clientChange?: (client : Client) => void
 }
 
 export default function Form(props: FormProps){
@@ -28,7 +29,8 @@ export default function Form(props: FormProps){
           <Input text="Idade"  type='number' value={age}  onchange={setAge}/>
 
           <div className='flex justify-end mt-3'>
-            <Button className=' bg-gradient-to-r from-blue-400 to-blue-700 mr-2'>
+            <Button onClick={() => props.clientChange?.(new Client(name,+age, id))}
+             className=' bg-gradient-to-r from-blue-400 to-blue-700 mr-2'>
               {id ? 'Alterar' : 'Salvar'}
             </Button>
 
